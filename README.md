@@ -1,6 +1,6 @@
 # SaisineLoup2025
 
-Données et code R permettant de reproduire les analyses et résulats :
+Données et code R permettant de reproduire les analyses et résulats du rapport :
 Duchamp, C. Milleret C., Gimenez, O. 2025. Mise à jour 2025 de l’état de conservation de la population de loups en France sous régime de tirs dérogatoires. Rapport de saisine interministérielle. OFB/CEFE-CNRS., France. xx pages. Disponible sur : 
 
 Le code R ainsi que les données pour reproduire l'ensemble des travaux est disponible dans le dossier RCode (Script.R; et Marescot2012Adapted.R). 
