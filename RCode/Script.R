@@ -1367,7 +1367,8 @@ for (i in 1:length(harvestPred)) {
   HarvestPerc[,i] <- harvestPred[i]/exp_mcmc$sims.list$N[,nyears]
 }
 
-ptable <- as.data.frame(cbind(harvestPred, colMeans(HarvestPerc), p_under, p_between, p_over, rep(lower, length(harvestPred)), rep(upper, length(harvestPred))))
+ptable <- as.data.frame(cbind(harvestPred, colMeans(HarvestPerc), p_under, p_between, p_over,
+                              rep(lower, length(harvestPred)), rep(upper, length(harvestPred))))
 names(ptable) <- c("Harvest","Harvest %", "P(lambda < 1)", "P(1 < lambda < 1.1)", "P(lambda > 1.1)", "Lower", "Upper")
 
 #====   4.3 Plot growth shooting exp model ====
@@ -1401,18 +1402,25 @@ dev.off()
 
 
 #====   4.3 Table legal mortality vs growth ====
-ptable <- as.data.frame(cbind(harvestPred, round(colMeans(HarvestPerc)*100,digits=0), 
+ptableF <- as.data.frame(cbind(harvestPred, round(colMeans(HarvestPerc)*100,digits=0), 
                               round(p_under,digits=2), round(p_between,digits=2),round(p_over,digits=2),
                               paste(round(CIL,digits=0),"-",round(CIH,digits=0),sep="")))[seq(6,501,by=10),]
-names(ptable) <- c("Harvest", "Harvest %", "P(lambda < 1)",
+names(ptableF) <- c("Harvest", "Harvest %", "P(lambda < 1)",
                    "P(1 < lambda < 1.1)","P(lambda > 1.1)",
                    "Prediction effectifs")
-write.csv(ptable[as.numeric(ptable[,1])>50 & as.numeric(ptable[,1])< 400, ],
+write.csv(ptableF[as.numeric(ptableF[,1])>50 & as.numeric(ptableF[,1])< 400, ],
           file =paste(wdFigure,"/TableTirs.csv",sep="") )
 
 
-
-
+##long format
+# ptableFLong <- as.data.frame(cbind(harvestPred, round(colMeans(HarvestPerc)*100,digits=1), 
+#                                round(p_under,digits=2), round(p_between,digits=2),round(p_over,digits=2),
+#                                paste(round(CIL,digits=0),"-",round(CIH,digits=0),sep="")))
+# names(ptableFLong) <- c("Harvest", "Harvest %", "P(lambda < 1)",
+#                     "P(1 < lambda < 1.1)","P(lambda > 1.1)",
+#                     "Prediction effectifs")
+# write.csv(ptableFLong[as.numeric(ptableFLong[,1])>50 & as.numeric(ptableFLong[,1])< 400, ],
+#           file =paste(wdFigure,"/TableTirsLong.csv",sep="") )
 
 #==== 5. Extra step not in the report; take timing into account in predictions ====
 # Number of wolves that can be shot is determined for the year 2025 based on the latest pop size estimates: winter 2023/24.
